@@ -23,9 +23,9 @@ GRANT RELOAD, LOCK TABLES, REPLICATION CLIENT ON *.* TO '<%= node["percona"]["ba
 
 # Grant permissions for the healthcheck user
 # Ensure the user exists, then revoke all grants, then re-grant specific permissions
-GRANT PROCESS ON *.* TO `clustercheck`@`localhost` IDENTIFIED BY '<%= @clustercheck_password %>';
+GRANT PROCESS ON *.* TO `clustercheck`@`localhost` IDENTIFIED BY '<%= @backup_password %>';
 REVOKE ALL PRIVILEGES, GRANT OPTION FROM `clustercheck`@`localhost`;
-GRANT PROCESS ON *.* TO `clustercheck`@`localhost` IDENTIFIED BY '<%= @clustercheck_password %>';
+GRANT PROCESS ON *.* TO `clustercheck`@`localhost` IDENTIFIED BY '<%= @backup_password %>';
 
 
 # Set the server root password. This should be preseeded by the package installation.
