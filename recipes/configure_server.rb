@@ -92,9 +92,15 @@ end
 
 # now let's set the root password only if this is the initial install
 unless node["percona"]["skip_passwords"]
+
+  if node['percona']['testkitchen_root_password'].nil?
+    mysql_root_password = passwords.root_password
+  else
+    mysql_root_password = node['percona']['testkitchen_root_password']
+  end
+
   execute "Update MySQL root password" do
-    root_pw = passwords.root_password
-    command "mysqladmin --user=root --password='' password '#{root_pw}'"
+    command "mysqladmin --user=root --password='' password '#{mysql_root_password}'"
     not_if "test -f /etc/mysql/grants.sql"
   end
 end
