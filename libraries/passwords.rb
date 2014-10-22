@@ -27,7 +27,12 @@ class Chef
 
     # mysql root
     def root_password
-      find_password "mysql", "root", node_server["root_password"]
+      if node['percona']['testkitchen_root_password'].nil?
+        password = find_password "mysql", "root", node_server["root_password"]
+      else
+        password = node['percona']['testkitchen_root_password']
+      end
+      password
     end
 
     # debian script user password
