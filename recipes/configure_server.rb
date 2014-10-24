@@ -93,10 +93,10 @@ end
 # now let's set the root password only if this is the initial install
 unless node["percona"]["skip_passwords"]
 
-  if node['percona']['testkitchen_root_password'].nil?
+  if node['percona']['fake_root_password'].nil?
     mysql_root_password = passwords.root_password
   else
-    mysql_root_password = node['percona']['testkitchen_root_password']
+    mysql_root_password = node['percona']['fake_root_password']
   end
 
   execute "Update MySQL root password" do
